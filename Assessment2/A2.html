@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Generator</title>
+    <link rel="stylesheet" href="A2.css">
+</head>
+<body>
+    <header>
+        <h1>Meme Generator</h1>
+    </header>
+
+    <form>
+        <input type="text" placeholder="Image URL" name="imageURL">
+        <input type="text" placeholder="Top Text" name="topText">
+        <input type="text" placeholder="Bottom Text" name="bottomText">
+        <button type="submit">Generate Dank Meme!</button>
+    </form>
+    <div id="meme-container"></div>
+    <script>
+        const form= document.querySelector("form");
+        const memeContainer = document.getElementById("meme-container");
+        
+        form.addEventListener("submit", function (event) {
+                event.preventDefault();
+        
+                const topText= form.elements.topText.value;
+                const bottomText= form.elements.bottomText.value;
+                const imageURL= form.elements.imageURL.value;
+        
+                if (topText === '' || bottomText === '' || imageURL === '') {
+                    alert(" Fill out all fields")
+                    return;
+                }
+        
+        const meme = document.createElement('div');
+        meme.style.backgroundImage = `URL(${imageURL})`;
+        
+        const topTextdiv = document.createElement('div');
+        topTextdiv.innerText = topText;
+        topTextdiv.classList.add('top-text');
+        
+        const bottomTextDiv = document.createElement('div');
+        bottomTextDiv.innerText = bottomText;
+        bottomTextDiv.classList.add('bottom-text');
+        
+        const deleteButton = document.createElement('button');
+        deleteButton.innerText = "Delete";
+        deleteButton.addEventListener('click', function() {
+            meme.remove();
+        });
+        
+        meme.appendChild(topTextdiv);
+        meme.appendChild(bottomTextDiv);
+        meme.appendChild(deleteButton);
+        
+        memeContainer.appendChild(meme);
+        
+        form.reset();
+        });
+    
+    </script>
+</body>
+</html>
